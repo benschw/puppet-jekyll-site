@@ -5,6 +5,17 @@ class jekyll-site(
                 $app_name = 'my-app'
         ) {
 
+
+        package { 'rubygems':
+                ensure => present,
+        }
+
+        exec { 'gem-install-jekyll':
+                command => 'gem install jekyll',
+                require => Package['rubygems'];
+        }
+
+
         exec { 'clone-site':
                 command     => "git clone -b $branch $repo_url $target_dir",
                 user        => "www-data",
@@ -28,7 +39,8 @@ class jekyll-site(
                 provider => 'upstart',
                 require => [
                         File["upstart-${app_name}"],
-                        Exec['clone-site']
+                        Exec['clone-site'],
+                        Exec['gem-install-jekyll']
                 ]
         }
 
