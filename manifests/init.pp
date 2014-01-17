@@ -15,10 +15,8 @@ class jekyll-site(
                 require => Package['rubygems'];
         }
 
-
         exec { 'clone-site':
                 command     => "git clone -b $branch $repo_url $target_dir",
-                user        => "www-data",
                 require     => [
                         Package['git'],
                 ],
