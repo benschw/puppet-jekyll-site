@@ -23,7 +23,7 @@ class jekyll-site(
         }
 
 
-        service { 'myapp':
+        service { "${app_name}":
                 ensure => running,
                 provider => 'upstart',
                 require => [
