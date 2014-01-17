@@ -7,7 +7,7 @@ class jekyll-site(
         ) {
 
 
-        package { 'rubygems':
+        package { ['rubygems', 'git']:
                 ensure => present,
         }
         package { 'jekyll':
