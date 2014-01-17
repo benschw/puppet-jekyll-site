@@ -13,6 +13,9 @@ class jekyll-site(
         package { 'jekyll':
                 ensure   => 'installed',
                 provider => 'gem',
+                require     => [
+                        Package['rubygems'],
+                ],
         }
 
         exec { 'clone-site':
