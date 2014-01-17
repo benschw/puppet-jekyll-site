@@ -7,4 +7,4 @@ setuid root
 respawn
 respawn limit 5 20
 
-exec jekyll serve -s <%= @target_dir %>
+exec jekyll serve -s <%= @target_dir %> --port <%= @port %>
