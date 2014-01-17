@@ -9,10 +9,9 @@ class jekyll-site(
         package { 'rubygems':
                 ensure => present,
         }
-
-        exec { 'gem-install-jekyll':
-                command => 'gem install jekyll',
-                require => Package['rubygems'];
+        package { 'jekyll':
+                ensure   => 'installed',
+                provider => 'gem',
         }
 
         exec { 'clone-site':
@@ -38,7 +37,7 @@ class jekyll-site(
                 require => [
                         File["upstart-${app_name}"],
                         Exec['clone-site'],
-                        Exec['gem-install-jekyll']
+                        Package['jekyll'],
                 ]
         }
 
